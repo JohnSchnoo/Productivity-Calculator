@@ -1,0 +1,41 @@
+<head>
+  <meta charset="UTF-8" />
+  <title>Productivity Calculator</title>
+  <style>
+    body { font-family: Arial; padding: 20px; }
+    label, select, input, button { display: block; margin: 10px 0; }
+  </style>
+</head>
+<body>
+  <label for="buildingType">Select Building Type:</label>
+  <select id="buildingType">
+    <option value="office">Office</option>
+    <option value="warehouse">Warehouse</option>
+    <option value="school">School</option>
+  </select>
+
+  <label for="sqm">Enter Square Meters:</label>
+  <input type="number" id="sqm" />
+
+  <button onclick="calculate()">Calculate Hours</button>
+
+  <p id="result"></p>
+
+  <script>
+    function calculate() {
+      const type = document.getElementById("buildingType").value;
+      const sqm = parseFloat(document.getElementById("sqm").value);
+      const rates = { office: 300, warehouse: 500, school: 250 };
+      const rate = rates[type];
+
+      if (!rate || isNaN(sqm)) {
+        document.getElementById("result").innerText = "Please enter valid inputs.";
+        return;
+      }
+
+      const hours = (sqm / rate).toFixed(2);
+      document.getElementById("result").innerText = `Estimated hours required: ${hours} hours.`;
+    }
+  </script>
+</body>
+</html>
